@@ -3,6 +3,7 @@ import React from 'react';
 import { API_ENDPOINT } from '../../config/constants';
 import { useForm, SubmitHandler } from "react-hook-form";
 import  {useNavigate}  from "react-router-dom";
+import myGIF from '../../assets/Gifs/login.gif'
 
 
 type Inputs = {
@@ -37,7 +38,7 @@ const SigninForm: React.FC = () => {
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("userData", JSON.stringify(data.user));
 
-      nav("/account/projects");
+      nav("/user/sports");
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
@@ -45,28 +46,25 @@ const SigninForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label className="block text-gray-700 font-semibold mb-2">Email:</label>
-        <input
-          type="email"
-          id="email"
-          {...register("email", { required: true })}
-          className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
-        />
+        
+      <section className="text-gray-600 body-font">
+  <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+    <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+    <img src={myGIF} alt="my-gif" />
+      <p className="leading-relaxed mt-4"></p>
+    </div>
+    <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+      <h2 className="text-gray-900 text-lg font-medium title-font mb-5">Login To Your Account</h2>
+      <div className="relative mb-4">
+        <label  className="leading-7 flex text-sm text-gray-600">Email</label>
+        <input type="email" id="email" {...register("email", { required: true })} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
         {errors.email && (
           <span className="text-red-500">This field is required</span>
         )}
       </div>
-      <div>
-        <label className="block text-gray-700 font-semibold mb-2">
-          Password:
-        </label>
-        <input
-          type="password"
-          id="password"
-          {...register("password", { required: true })}
-          className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
-        />
+      <div className="relative mb-4">
+        <label  className="leading-7 text-sm text-gray-600 flex">Password</label>
+        <input type="password" id="password"  {...register("password", { required: true })} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
         {errors.password && (
           <span className="text-red-500">This field is required</span>
         )}
@@ -83,6 +81,9 @@ const SigninForm: React.FC = () => {
           Signup here
         </a>
       </p>
+    </div>
+  </div>
+</section>
     </form>
   );
 };

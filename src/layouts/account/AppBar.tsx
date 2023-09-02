@@ -30,13 +30,13 @@ document.documentElement.classList.remove("dark");
 
   return (
     <>
-      <Disclosure as="nav" className="border-b border-slate-200">
+      <Disclosure as="nav" className="border-b border-slate-300">
         {({  }) => (
             
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
+          <div>
+            <div className="flex px-6 justify-between">
               <div className="flex items-center">
-              <Link to='/'>  <div className="flex-shrink-0">
+              <Link to='/'>  <div className="flex">
                     <img
                     className="h-8"
                     src={Logo}
@@ -44,8 +44,7 @@ document.documentElement.classList.remove("dark");
                   />
                   
                 </div> </Link>
-                <h1 className='px-3 font-semibold text-2xl'>Sports Prime</h1>
-                
+                <h1 className='text-justify font-semibold text-xl'>Sports Prime</h1>
               </div>
               <Switch
         checked={enabled}

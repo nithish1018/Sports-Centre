@@ -1,35 +1,36 @@
-import { useEffect, useState } from "react";
-import { API_ENDPOINT } from "../../config/constants";
 import { Link, Outlet } from "react-router-dom";
-type Games = {
-    id: number;
-    name: string;
-    location: string;
-    sportName: string;
-    isRunning: any;
+import { useGamesState } from "../../context/Games/context";
+import  { useEffect } from "react";
+import { useGamesDispatch } from "../../context/Games/context";
+import { fetchGames } from "../../context/Games/actions";
 
-}
-function LiveGames() {
-    const [Games, setGames] = useState<Games[]>([]);
-    useEffect(() => {
-        const fetchGames = async () => {
-            const response = await fetch(
-                `${API_ENDPOINT}/matches`
-            );
-            const data = await response.json();
-            console.log(data)
-            setGames(data.matches);
-        }
-        fetchGames();
-    })
-    const sortedGames = [...Games].sort((a, b) => (b.isRunning - a.isRunning));
+
+export default function LiveGames() {
+    const GameDispatch = useGamesDispatch();
+  useEffect(() => {
+  const test=  fetchGames(GameDispatch);
+  console.log(test)
+   
+  }, [GameDispatch]);
+  let state: any = useGamesState();
+  const { games, isLoading, isError, errorMessage } = state ||{};
+  console.log(games);
+  if (games.length === 0 && isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>{errorMessage}</span>;
+  }
+
+    const sortedGames = [...games].sort((a, b) => (b.isRunning - a.isRunning));
 
     return (
         <div>
             <h1 className="text-xl p-2 text-justify font-mono font-semibold"> Live Games</h1>
       
       <div className="flex gap-4 overflow-x-auto w-full">
-            {sortedGames.map((Game) => (
+            {sortedGames && sortedGames.map((Game) => (
             <Link to={`/matches/${Game.id}`} key={Game.id} className="flex-shrink-0 bg-white p-3 rounded-md text-black" >
                 <div className=" px-3 py-3 bg-white rounded-lg flex-shrink-0 shadow text-sm  border border-black" >
                     <div className="text-justify text-purple-500 text-sm">   {Game.sportName} </div>
@@ -49,4 +50,3 @@ function LiveGames() {
 
     )
 }
-export default LiveGames;

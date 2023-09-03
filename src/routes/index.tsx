@@ -4,9 +4,9 @@ import SignupForm from "../pages/signup";
 import Hello from "../pages/index/Hello";
 import AccountLayout from "../layouts/account";
 import LiveGames from "../pages/news/sports";
-import MatchModal from "../pages/match/MatchModal";
-
-
+import MatchModal from "../pages/modals/MatchModal";
+import ArticleModal from "../pages/modals/ArticleModal";
+import Articles from "../pages/news/articles";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +21,17 @@ const router = createBrowserRouter([
           {
             path: ":matchID",
             element: <MatchModal />,
+          }
+        ],
+      },
+      {
+        path: "articles",
+        element: <Articles/>,
+        children: [
+          { index: true, element:<></> },
+          {
+            path: ":articleID",
+            element: <ArticleModal />,
           }
         ],
       },

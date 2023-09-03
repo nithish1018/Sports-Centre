@@ -28,8 +28,15 @@ export default function Articles() {
             <h1 className="text-xl p-2 text-justify font-mono font-semibold">Sport Articles</h1>
 
             <div >
-                {articles.map((article: {
-                   
+                {articles && articles.map((article: {
+                   id: number;
+                   thumbnail: string;
+                   sport: {
+                    id: number;
+                    name: string;
+                   };
+                   title: string;
+                   summary: string;
                 }) => (
                     <Link to={`/articles/${article.id}`} key={article.id} className=" p-3 rounded-md text-black" >
                         <div className="container flex-1 rounded mx-auto border border-black">

@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { useArticlesState } from "../../context/Articles/context";
-import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect } from "react";
+import { useEffect } from "react";
 import { useArticlesDispatch } from "../../context/Articles/context";
 import { fetchArticles } from "../../context/Articles/actions";
 
@@ -11,10 +11,9 @@ export default function Articles() {
     useEffect(() => {
         const test = fetchArticles(ArticleDispatch);
         console.log(test)
-
     }, [ArticleDispatch]);
     let state: any = useArticlesState();
-    const { articles, isLoading, isError, errorMessage } = state || {};
+    const { articles, isLoading, isError, errorMessage } = state ||{};
     console.log(articles);
     if (articles.length === 0 && isLoading) {
         return <span>Loading...</span>;
@@ -29,19 +28,16 @@ export default function Articles() {
             <h1 className="text-xl p-2 text-justify font-mono font-semibold">Sport Articles</h1>
 
             <div >
-                {articles && articles.map((article: {
-                    summary: ReactNode;
-                    name: ReactNode;
-                    thumbnail: string | undefined; id: Key | null | undefined; title: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; date: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined;
+                {articles.map((article: {
+                   
                 }) => (
-                    <Link to={`/articles/${article.id}`} key={article.id} className="flex-shrink-0 bg-white p-3 rounded-md text-black" >
-                        <div className="container mx-auto">
-                            <div className="flex flex-wrap">
-                                <div className="w-full md:w-1/2 lg:w-1/2">
-                                    <img src={article.thumbnail} alt="Image" className="w-full h-auto object-cover" />
-                                </div>
-                                <div className="w-full md:w-1/2 lg:w-1/2 p-4">
-                                    <h1 className="text-4xl font-bold">{article.title}</h1>
+                    <Link to={`/articles/${article.id}`} key={article.id} className=" p-3 rounded-md text-black" >
+                        <div className="container flex-1 rounded mx-auto border border-black">
+                            <div className="flex">                 
+                                <img src={article.thumbnail} alt="Image" className="w-40 h-45 object-cover" />
+                                <div className="px-4 py-4">
+                                    <h1 className="text-4xl font-bold">{article.sport.name}</h1>
+                                    <h1 className="text-3xl font-semibold">{article.title}</h1>
                                     <p className="text-lg text-gray-700">{article.summary}</p>
                                 </div>
                             </div>

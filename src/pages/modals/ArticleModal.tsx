@@ -26,7 +26,7 @@ type MatchDetails={
 const ArticleModal = () => {
   const [match, setMatch] = useState<MatchDetails | undefined>(undefined);
   const [isOpen, setIsOpen] = useState(false);
-  const { matchID } = useParams();
+  const { articleID } = useParams();
   const navigate = useNavigate();
 
   function closeModal() {
@@ -35,7 +35,7 @@ const ArticleModal = () => {
   }
 
   const fetchMatch = () => {
-    fetch(`${API_ENDPOINT}/matches/${matchID}`)
+    fetch(`${API_ENDPOINT}/artciles/${articleID}`)
       .then((res) => res.json())
       .then((data) => {
         setMatch(data);

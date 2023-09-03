@@ -1,11 +1,20 @@
+type Sport={
+    id:number;
+    name:string;
+}
+type Teams={
+    id:number;
+    name:string;
+}
+
 type Articles = {
     id: number;
     title: string;
     thumbnail: string;
-    sport: object;
+    sport: Sport;
     date:string;
     summary:string;
-    teams:object;
+    teams:Teams[];
 }
 export interface ArticlesState {
     articles: Articles[];

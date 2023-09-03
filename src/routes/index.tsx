@@ -15,20 +15,13 @@ const router = createBrowserRouter([
       {index:true, element: <Hello />},
       {
         path: "matches",
-        element: <LiveGames/>,
+        element:<> <LiveGames/> <Articles/> </>,
         children: [
           { index: true, element:<></> },
           {
             path: ":matchID",
             element: <MatchModal />,
-          }
-        ],
-      },
-      {
-        path: "articles",
-        element: <Articles/>,
-        children: [
-          { index: true, element:<></> },
+          },
           {
             path: ":articleID",
             element: <ArticleModal />,

@@ -7,6 +7,7 @@ import LiveGames from "../pages/news/sports";
 import MatchModal from "../pages/modals/MatchModal";
 import ArticleModal from "../pages/modals/ArticleModal";
 import Articles from "../pages/news/articles";
+import Logout from "../logout";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupForm/>,
+  },
+  {
+    path: "/logout",
+    element: <Logout />,
   },
 ]);
 

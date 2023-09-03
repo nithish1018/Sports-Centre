@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 const userNavigation = [
   { name: 'Sign out', href: '/logout' },
 ]
+const userData = JSON.parse(localStorage.getItem('userData')|| '{}');
 
 const classNames = (...classes: string[]): string => classes.filter(Boolean).join(' ');
 
@@ -59,6 +60,7 @@ document.documentElement.classList.remove("dark");
                 pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white  ring-0 transition duration-200 ease-in-out`}
             />
           </Switch>
+          { (userData.email)?
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
                   <Menu as="div" className="relative ml-3">
@@ -76,7 +78,7 @@ document.documentElement.classList.remove("dark");
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1  ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1  ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
@@ -91,12 +93,16 @@ document.documentElement.classList.remove("dark");
                               </a>
                             )}
                           </Menu.Item>
+
+
                         ))}
                       </Menu.Items>
                     </Transition>
                   </Menu>
                 </div>
               </div>
+            :""
+}
             </div>
           </div>
         )}

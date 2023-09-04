@@ -1,8 +1,9 @@
-import { Outlet } from "react-router-dom"
-import AppBar from "./AppBar"
+import { Outlet } from "react-router-dom";
+import AppBar from "./AppBar";
+import LiveGames from "../../pages/news/sports";
+import Articles from "../../pages/news/articles";
 
 const AccountLayout = () => {
-
   return (
     <>
       <AppBar />
@@ -12,7 +13,7 @@ const AccountLayout = () => {
         </div>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default AccountLayout
+export default AccountLayout;

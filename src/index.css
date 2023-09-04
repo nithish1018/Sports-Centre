@@ -1,6 +1,6 @@
 .dark {
-    @apply bg-slate-800 text-zinc-50;
-  }
+  @apply bg-slate-800 text-zinc-50;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

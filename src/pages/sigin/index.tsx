@@ -1,17 +1,15 @@
-import React from 'react';
+import React from "react";
 // Dialogue 1: Just import the file
-import SigninForm from "./SigninForm"
-
+import SigninForm from "./SigninForm";
 
 const Signin: React.FC = () => {
   // Dialogue 2: And use it after the h1 tag
   return (
-    <div >
-      <div >
+    <div>
+      <div>
         <SigninForm />
       </div>
-      </div>
- 
+    </div>
   );
-}
+};
 export default Signin;

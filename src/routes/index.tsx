@@ -3,34 +3,46 @@ import Signin from "../pages/sigin";
 import SignupForm from "../pages/signup";
 import Hello from "../pages/index/Hello";
 import AccountLayout from "../layouts/account";
-import LiveGames from "../pages/news/sports";
 import MatchModal from "../pages/modals/MatchModal";
 import ArticleModal from "../pages/modals/ArticleModal";
-import Articles from "../pages/news/articles";
 import Logout from "../logout";
+import Home from "../pages/index";
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<AccountLayout/>,
+    element: <AccountLayout />,
     children: [
-      {index:true, element: <Hello />},
       {
-        path: "matches",
-        element:<> <LiveGames/> <Articles/> </>,
+        index: true,
+        element: <Hello />,
+      },
+      {
+        path: "home",
+        element: <Home />,
         children: [
-          { index: true, element:<></> },
           {
-            path: ":matchID",
-            element: <MatchModal />,
+            path: "matches",
+            children: [
+              { index: true, element: <></> },
+              {
+                path: ":matchID",
+                element: <MatchModal />,
+              },
+            ],
           },
           {
-            path: "articles/:articleID",
-            element: <ArticleModal />,
+            path: "articles",
+            children: [
+              { index: true, element: <></> },
+              {
+                path: ":articleID",
+                element: <ArticleModal />,
+              },
+            ],
           },
-        
         ],
       },
-    ]
+    ],
   },
   {
     path: "/signin",
@@ -38,7 +50,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <SignupForm/>,
+    element: <SignupForm />,
   },
   {
     path: "/logout",

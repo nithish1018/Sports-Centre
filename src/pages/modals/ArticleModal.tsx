@@ -64,7 +64,7 @@ const ArticleModal = () => {
       <Modal onClose={onClose} isOpen={isOpen} scrollBehavior="outside">
         <ModalOverlay />
         <ModalContent>
-          <div className="bg-white">
+          <div className="bg-white rounded">
             <ModalHeader>{article?.title}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>{article?.content}</ModalBody>

@@ -1,12 +1,27 @@
 import { Link, Outlet } from "react-router-dom";
 import { useGamesState } from "../../context/Games/context";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGamesDispatch } from "../../context/Games/context";
 import { fetchGames } from "../../context/Games/actions";
 import { Waveform } from '@uiball/loaders'
+import { ThemeContext } from "../../context/theme";
 
 
 export default function LiveGames() {
+    const { theme, setTheme } = useContext(ThemeContext)
+    const [enabled, setEnabled] = useState(theme === 'dark')
+    const toggleTheme = () => {
+      if(theme==="light"){
+       var newTheme = "dark";
+  document.documentElement.classList.add("dark");
+  }
+  else{
+  newTheme="light";
+  document.documentElement.classList.remove("dark");
+  }
+      setEnabled(!enabled)
+      setTheme(newTheme)
+    }
     const GameDispatch = useGamesDispatch();
     useEffect(() => {
         const test = fetchGames(GameDispatch);

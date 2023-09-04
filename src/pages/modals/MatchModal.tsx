@@ -4,24 +4,26 @@ import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_ENDPOINT } from "../../config/constants";
 import { Fragment, useEffect, useState } from "react";
+import { Waveform } from '@uiball/loaders'
 
- type Team = {
-    id: number;
-    name: string;
-    plays?: string;
-  };
-type MatchDetails={
-    id: number;
-    name: string;
-    startsAt: string;
-    endsAt: string;
-    sportName: string;
-    isRunning: boolean;
-    location: string;
-    story: string;
-    teams:Team[];
-    score: any;
-    playingTeam: number;
+
+type Team = {
+  id: number;
+  name: string;
+  plays?: string;
+};
+type MatchDetails = {
+  id: number;
+  name: string;
+  startsAt: string;
+  endsAt: string;
+  sportName: string;
+  isRunning: boolean;
+  location: string;
+  story: string;
+  teams: Team[];
+  score: any;
+  playingTeam: number;
 }
 const MatchModal = () => {
   const [match, setMatch] = useState<MatchDetails | undefined>(undefined);
@@ -74,7 +76,7 @@ const MatchModal = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-purple-800 text-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-green-800 text-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-2xl font-bold leading-6 text-white"
@@ -83,27 +85,32 @@ const MatchModal = () => {
                   </Dialog.Title>
                   <div className="flex justify-between items-center mt-1 mb-3 gap-6 ">
                     <p className="text-sm">{match?.sportName}</p>
-                    {match?.isRunning ? (
-                      <div className="flex items-center gap-1">
-                        <span className="p-1 rounded-full bg-white animate-pulse" />
-                        <p className="text-white text-sm">Running</p>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2 text-gray-200">
-                        <div className="flex items-center text-sm gap-1">
-                          <CalendarDaysIcon className="w-4 h-4" />
-                          <p>
-                            {match?.startsAt &&
-                              new Date(match.startsAt).toDateString()}
-                          </p>
-                        </div>
-                        <p>to</p>
-                        <p className="text-sm">
+                    {
+                      (match?.isRunning) ? <div className="flex gap-2 text-green-600">
+
+                        <Waveform
+                          size={20}
+                          lineWeight={3.5}
+                          speed={1}
+                          color="purple"
+                        />
+                        <p className=" bg-green-200 rounded font-semibold px-2 animate-bounce">Running</p>
+                      </div> :
+                    <div className="flex items-center gap-2 text-gray-200">
+                      <div className="flex items-center text-sm gap-1">
+                        <CalendarDaysIcon className="w-4 h-4" />
+                        <p>
                           {match?.startsAt &&
                             new Date(match.startsAt).toDateString()}
                         </p>
                       </div>
-                    )}
+                      <p>to</p>
+                      <p className="text-sm">
+                        {match?.startsAt &&
+                          new Date(match.startsAt).toDateString()}
+                      </p>
+                    </div>
+                    }
                   </div>
                   <div className="my-2">
                     <div className="flex gap-2 items-center">

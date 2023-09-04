@@ -1,12 +1,27 @@
 import { Link, Outlet } from "react-router-dom";
 import { useArticlesState } from "../../context/Articles/context";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useArticlesDispatch } from "../../context/Articles/context";
 import { fetchArticles } from "../../context/Articles/actions";
+import { ThemeContext } from "../../context/theme";
 
 
 
 export default function Articles() {
+    const { theme, setTheme } = useContext(ThemeContext)
+    const [enabled, setEnabled] = useState(theme === 'dark')
+    const toggleTheme = () => {
+      if(theme==="light"){
+       var newTheme = "dark";
+  document.documentElement.classList.add("dark");
+  }
+  else{
+  newTheme="light";
+  document.documentElement.classList.remove("dark");
+  }
+      setEnabled(!enabled)
+      setTheme(newTheme)
+    }
     const ArticleDispatch = useArticlesDispatch();
     useEffect(() => {
         const test = fetchArticles(ArticleDispatch);
@@ -39,10 +54,10 @@ export default function Articles() {
                     summary: string;
                     date: string;
                 }) => (
-                    <Link to={`/articles/${article.id}`} key={article.id} className=" p-3 rounded-md text-black" >
-                        <div className="container flex-1 rounded mx-auto border border-black">
+                    <Link to={`/matches/articles/${article.id}`} key={article.id} className=" p-3 rounded-md text-black" >
+                        <div className="container flex-1 rounded mx-auto border-2 border-black">
                             <div className="flex">
-                                <img src={article.thumbnail} alt="Image" className="w-40 h-45 object-cover" />
+                                <img src={article.thumbnail} alt="Image" className="w-40 h-45 rounded object-cover" />
                                 <div className="px-4 py-4">
                                     <h1 className="text-4xl bg-red-300 rounded px-2 py-2 font-bold">{article.sport.name}</h1>
                                     <h1 className="text-3xl font-semibold">{article.title}</h1>

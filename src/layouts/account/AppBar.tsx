@@ -2,7 +2,7 @@ import { useState, useContext, Fragment } from 'react'
 import { ThemeContext } from "../../context/theme";
 import { Disclosure, Menu, Transition, Switch } from '@headlessui/react'
 import { UserCircleIcon } from '@heroicons/react/24/outline'
-import Logo from "../../assets/react.svg"
+import Logo from "../../assets/images/logo.jpg"
 import { Link } from "react-router-dom"
 
 const userNavigation = [
@@ -39,13 +39,13 @@ document.documentElement.classList.remove("dark");
               <div className="flex items-center">
               <Link to='/'>  <div className="flex">
                     <img
-                    className="h-8"
+                    className="h-8 w-auto"
                     src={Logo}
                     alt="Sports Prime"
                   />
                   
                 </div> </Link>
-                <h1 className='text-justify font-semibold text-xl'>Sports Prime</h1>
+                <h1 className='text-justify px-2 py-2 font-semibold text-xl'>Sports Prime</h1>
               </div>
               <Switch
         checked={enabled}

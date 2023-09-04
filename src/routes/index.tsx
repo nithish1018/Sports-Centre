@@ -23,13 +23,14 @@ const router = createBrowserRouter([
             path: ":matchID",
             element: <MatchModal />,
           },
-          {
-            path: ":articleID",
-            element: <ArticleModal />,
-          }
+        
         ],
       },
     ]
+  },
+  {
+    path: "articles/:articleID",
+    element: <ArticleModal />,
   },
   {
     path: "/signin",

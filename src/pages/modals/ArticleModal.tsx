@@ -5,26 +5,29 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API_ENDPOINT } from "../../config/constants";
 import { Fragment, useEffect, useState } from "react";
 
- type Team = {
-    id: number;
-    name: string;
-    plays?: string;
-  };
-type MatchDetails={
-    id: number;
-    name: string;
-    startsAt: string;
-    endsAt: string;
-    sportName: string;
-    isRunning: boolean;
-    location: string;
-    story: string;
-    teams:Team[];
-    score: any;
-    playingTeam: number;
+
+type Sports={
+  id:number;
+  name:string;
 }
+type Teams={
+  id:number;
+  name:string;
+}
+
+type Articles = {
+  id: number;
+  title: string;
+  thumbnail: string;
+  sport: Sports;
+  date:string;
+  content:string;
+  summary:string;
+  teams:Teams[];
+}
+
 const ArticleModal = () => {
-  const [match, setMatch] = useState<MatchDetails | undefined>(undefined);
+  const [article, setArticle] = useState<Articles | undefined>(undefined);
   const [isOpen, setIsOpen] = useState(false);
   const { articleID } = useParams();
   const navigate = useNavigate();
@@ -38,7 +41,7 @@ const ArticleModal = () => {
     fetch(`${API_ENDPOINT}/artciles/${articleID}`)
       .then((res) => res.json())
       .then((data) => {
-        setMatch(data);
+        setArticle(data);
         setIsOpen(true);
       });
   };
@@ -79,22 +82,16 @@ const ArticleModal = () => {
                     as="h3"
                     className="text-2xl font-bold leading-6 text-white"
                   >
-                    {match?.name}
+                    {article?.title}
                   </Dialog.Title>
                   <div className="flex justify-between items-center mt-1 mb-3 gap-6 ">
-                    <p className="text-sm">{match?.sportName}</p>
-                    {match?.isRunning ? (
-                      <div className="flex items-center gap-1">
-                        <span className="p-1 rounded-full bg-white animate-pulse" />
-                        <p className="text-white text-sm">Running</p>
-                      </div>
-                    ) : (
+                    <p className="text-sm">{article?.sport}</p>
+                   (
                       <div className="flex items-center gap-2 text-gray-200">
                         <div className="flex items-center text-sm gap-1">
                           <CalendarDaysIcon className="w-4 h-4" />
                           <p>
-                            {match?.startsAt &&
-                              new Date(match.startsAt).toDateString()}
+                            {article.date.split('T')[0]}
                           </p>
                         </div>
                         <p>to</p>
@@ -103,7 +100,7 @@ const ArticleModal = () => {
                             new Date(match.startsAt).toDateString()}
                         </p>
                       </div>
-                    )}
+                    )
                   </div>
                   <div className="my-2">
                     <div className="flex gap-2 items-center">

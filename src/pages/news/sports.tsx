@@ -34,7 +34,7 @@ export default function LiveGames() {
                 {sortedGames && sortedGames.map((Game) => (
                     <Link to={`/matches/${Game.id}`} key={Game.id} className="flex-shrink-0 bg-white p-3 rounded-md text-black" >
                         <div className=" px-3 py-3 bg-white rounded-lg flex-shrink-0 shadow text-sm  border border-black" >
-                            <div className="text-justify flex gap-4 text-purple-500 text-sm">   {Game.sportName}{
+                            <div className="text-justify flex gap-4 "> <span className="font-semibold bg-purple-200 rounded px-2 text-purple-600 text-sm">  {Game.sportName} </span>{
                                 (Game.isRunning) ? <div className="flex gap-2 text-green-600">
 
                                     <Waveform
@@ -43,9 +43,9 @@ export default function LiveGames() {
                                         speed={1}
                                         color="purple"
                                     />
-                                    <p className=" bg-green-200 rounded px-2">Running</p>
+                                    <p className=" bg-green-200 rounded font-semibold px-2 animate-bounce">Running</p>
                                 </div>
-                                    : <div className="text-red-600 bg-red-200 rounded px-2"> Ended </div>
+                                    : <div className="text-red-600 bg-red-200 font-semibold rounded px-2 animate-pulse"> Ended </div>
                             } </div>
 
                             <div className="text-xl py-2 font-medium">{Game.name.split("VS")[0]} VS {Game.name.split("VS")[1].split('at')[0]} </div>

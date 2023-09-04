@@ -59,11 +59,11 @@ const MatchModal = () => {
 
   return (
     <>
-      <Modal onClose={onClose} size={"full"} isOpen={isOpen} scrollBehavior="outside">
+      <Modal onClose={onClose}  isOpen={isOpen} scrollBehavior="outside">
         <ModalOverlay />
         <ModalContent>
           <div>
-            <div className="bg-black">
+            <div className="bg-black rounded-xl">
               <ModalHeader >
                 <div className="text-2xl rounded font-mono px-1 font-semibold"></div>
                 {match?.teams[0] ? (<div className="flex text-white gap-1">
@@ -127,11 +127,7 @@ const MatchModal = () => {
                   </svg>
                   {match?.location}{" "}
                 </div>
-              </ModalHeader>
-            </div>
-            <ModalCloseButton color={"white"} />
-            <ModalBody>
-              <div className="flex justify-between items-center mt-1 mb-3 gap-6 ">                 <p className="text-sm">{match?.sportName}</p>
+                <div className="flex justify-between items-center mt-1 mb-3 gap-6 ">
                 {match?.isRunning ? (
                   <div className="flex gap-2 text-green-600">
                     <Waveform
@@ -161,7 +157,10 @@ const MatchModal = () => {
                   </div>
                 )}
               </div>
-
+              </ModalHeader>
+            </div>
+            <ModalCloseButton color={"white"} />
+            <ModalBody>
               <div className="mt-4 bg-white -m-6 p-6 text-black">
                 <p className="font-bold text-lg">Story</p>
                 <p>{match?.story}</p>

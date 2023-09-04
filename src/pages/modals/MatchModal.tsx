@@ -59,11 +59,11 @@ const MatchModal = () => {
 
   return (
     <>
-      <Modal onClose={onClose}  isOpen={isOpen} scrollBehavior="outside">
+      <Modal onClose={onClose} isOpen={isOpen} scrollBehavior="outside">
         <ModalOverlay />
         <ModalContent>
-          <div>
-            <div className="bg-black rounded-xl">
+          <div className="rounded">
+            <div className="bg-black rounded">
               <ModalHeader >
                 <div className="text-2xl rounded font-mono px-1 font-semibold"></div>
                 {match?.teams[0] ? (<div className="flex text-white gap-1">
@@ -79,7 +79,7 @@ const MatchModal = () => {
                       <ArrowPathIcon className="text-white w-4 h-4" />
                     </button>
                   </div>
-                  <div className="ml-4">
+                  <div className="ml-4 ">
                     <div className="flex text-white items-center gap-2">
                       <div>
                         <span className=" text-white font-semibold">
@@ -95,12 +95,6 @@ const MatchModal = () => {
                         </span>
                         <span className="text-white"> {match?.score[match?.teams[1].name]} </span>
                       </div>
-                      {match?.playingTeam === match?.teams[1].id && (
-                        <span className="bg-white rounded-full px-2 text-sky-700 gap-1 text-xs py-1 flex items-center">
-                          <span className="p-1 rounded-full bg-indigo-700"></span>
-                          <span>Playing</span>
-                        </span>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -128,35 +122,36 @@ const MatchModal = () => {
                   {match?.location}{" "}
                 </div>
                 <div className="flex justify-between items-center mt-1 mb-3 gap-6 ">
-                {match?.isRunning ? (
-                  <div className="flex gap-2 text-green-600">
-                    <Waveform
-                      size={20}
-                      lineWeight={3.5}
-                      speed={1}
-                      color="purple"
-                    />
-                    <p className=" bg-green-200 rounded font-semibold px-2 animate-bounce">
-                      Running
-                    </p>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2 text-gray-200">
-                    <div className="flex items-center text-sm gap-1">
-                      <CalendarDaysIcon className="w-4 h-4" />
-                      <p>
+                  {match?.isRunning ? (
+                    <div className="flex gap-2 text-green-600">
+                      <Waveform
+                        size={20}
+                        lineWeight={3.5}
+                        speed={1}
+                        color="purple"
+                      />
+
+                      <p className=" bg-green-200 text-xs rounded font-semibold px-2 animate-bounce">
+                        Running
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-gray-200">
+                      <div className="flex items-center text-sm gap-1">
+                        <CalendarDaysIcon className="w-4 h-4" />
+                        <p>
+                          {match?.startsAt &&
+                            new Date(match.startsAt).toDateString()}
+                        </p>
+                      </div>
+                      <p>to</p>
+                      <p className="text-sm">
                         {match?.startsAt &&
                           new Date(match.startsAt).toDateString()}
                       </p>
                     </div>
-                    <p>to</p>
-                    <p className="text-sm">
-                      {match?.startsAt &&
-                        new Date(match.startsAt).toDateString()}
-                    </p>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
               </ModalHeader>
             </div>
             <ModalCloseButton color={"white"} />

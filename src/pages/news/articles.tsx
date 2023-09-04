@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useArticlesState } from "../../context/Articles/context";
 import { useArticlesDispatch } from "../../context/Articles/context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchArticles } from "../../context/Articles/actions";
+import { Tab } from '@headlessui/react'
+import { API_ENDPOINT } from "../../config/constants";
 
 export default function Articles() {
   const ArticleDispatch = useArticlesDispatch();
@@ -12,7 +14,6 @@ export default function Articles() {
   }, []);
   let state: any = useArticlesState();
   const { articles, isLoading, isError, errorMessage } = state || {};
-  console.log(articles);
   if (articles.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
@@ -20,10 +21,57 @@ export default function Articles() {
   if (isError) {
     return <span>{errorMessage}</span>;
   }
+  
+  type Sports={
+    id:number;
+    name:string;
+  }
+  const [sports, setSports] = useState<Sports[]>([]);
+
+  useEffect(() => {
+    const fetchSports = async () => {
+      const data = await fetch(`${API_ENDPOINT}/sports`, {
+        method: "GET"
+      });
+      const jsonData = await data.json();
+      setSports(jsonData.sports);
+    };
+
+    fetchSports();
+  }, []);
+  console.log(sports)
+
+  function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join('')
+  }
+
 
   return (
+    <div className="w-fullx-wpx-2 py-16 sm:px-0">
+    <Tab.Group>
+      <Tab.List className="flex space-x-1 rounded- bg-gray-600/2020 p-1">
+        {sports.map((sport) => (
+          <Tab
+            key={sport.id}
+            className={({ selected }) =>
+              classNames(
+                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
+                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                selected
+                  ? 'bwhitete shadow'
+                  : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+              )
+            }
+          >
+            {sport.name}
+          </Tab>
+        ))}
+      </Tab.List>
+      </Tab.Group>
+  
     <div>
-      <h1 className="text-xl p-2 text-justify font-mono font-semibold">
+      <br/>
+      <h1 className="text-xl px-2 text-justify font-mono font-semibold">
         Sport Articles
       </h1>
 
@@ -54,7 +102,7 @@ export default function Articles() {
                       className="w-40 h-45 rounded object-cover"
                     />
                     <div className="px-4 py-4">
-                      <h1 className="text-4xl bg-red-300 rounded px-2 py-2 font-bold">
+                      <h1 className="text-4xl bg-red-300 rounded px-2 py-2 font-bo dark:text-whiteld">
                         {article.sport.name}
                       </h1>
                       <h1 className="text-3xl font-semibold">
@@ -88,6 +136,7 @@ export default function Articles() {
             ),
           )}
       </div>
+    </div>
     </div>
   );
 }

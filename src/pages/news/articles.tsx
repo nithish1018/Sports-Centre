@@ -44,13 +44,15 @@ export default function Articles() {
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join('')
   }
-
-
-  return (
+return (
     <div className="w-fullx-wpx-2 py-16 sm:px-0">
+        <h1 className="text-xl px-2 text-justify font-mono font-semibold">
+        Sport Articles
+      </h1>
+      <br/>
     <Tab.Group>
       <Tab.List className="flex space-x-1 rounded- bg-gray-600/2020 p-1">
-        {sports.map((sport) => (
+        {[{id:-1,name: "All news"}, ...sports].map((sport) => (
           <Tab
             key={sport.id}
             className={({ selected }) =>
@@ -58,8 +60,8 @@ export default function Articles() {
                 'w-full  rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
                 'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                 selected
-                  ? 'bwhitete shadow border border-black'
-                  : 'text-blue-100 hover:bg-white/[0.12] hover:font-bold'
+                  ? 'bwhitete shadow dark:bg-white dark:text-black border border-black'
+                  : 'text-blue-100  hover:bg-white/[0.12] hover:font-bold'
               )
             }
           >
@@ -67,16 +69,12 @@ export default function Articles() {
           </Tab>
         ))}
       </Tab.List>
-      </Tab.Group>
-  
-    <div>
-      <br/>
-      <h1 className="text-xl px-2 text-justify font-mono font-semibold">
-        Sport Articles
-      </h1>
-
-      <div>
-        {articles &&
+      <Tab.Panels>
+    
+      {[{id:-1,name: "All news"}, ...sports].map((sport, idx) => {
+        let flag = true;
+        return <Tab.Panel key={idx}>
+          {articles &&
           articles.map(
             (article: {
               id: number;
@@ -88,13 +86,17 @@ export default function Articles() {
               title: string;
               summary: string;
               date: string;
-            }) => (
-              <Link
+            }) => {
+              if (sport.id === -1 || article?.sport.name===sport.name){
+                flag = false;
+                return (
+                  <Link
                 to={`articles/${article.id}`}
                 key={article.id}
                 className=" p-3 rounded-md text-black"
               >
-                <div className="container flex-1 rounded mx-auto border-2 border-black">
+              
+                <div className="container flex-1 rounded mx-auto border-2 border-black"> 
                   <div className="flex">
                     <img
                       src={article.thumbnail}
@@ -105,11 +107,11 @@ export default function Articles() {
                       <h1 className="text-4xl bg-red-300 rounded px-2 py-2 font-bo dark:text-whiteld">
                         {article.sport.name}
                       </h1>
-                      <h1 className="text-3xl font-semibold">
+                      <h1 className="text-3xl dark:text-white font-semibold">
                         {article.title}
                       </h1>
-                      <p className="text-lg text-gray-700">{article.summary}</p>
-                      <div className="flex gap-2 py-2 px-2">
+                      <p className="text-lg dark:text-white text-gray-700">{article.summary}</p>
+                      <div className="flex dark:text-white gap-2 py-2 px-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -133,10 +135,18 @@ export default function Articles() {
                   </div>
                 </div>
               </Link>
-            ),
-          )}
-      </div>
-    </div>
+                )
+              }
+              
+            }
+        )}
+        {
+          flag && <div className="grid h-screen text-2xl place-items-center"> Sorry No articles Found</div>
+        }
+        </Tab.Panel>
+})}
+      </Tab.Panels>
+      </Tab.Group>
     </div>
   );
 }

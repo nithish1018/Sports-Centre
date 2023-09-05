@@ -37,9 +37,9 @@ export default function LiveGames() {
             <Link
               to={`matches/${Game.id}`}
               key={Game.id}
-              className="flex-shrink-0 bg-white p-3 rounded-md text-black"
+              className="flex-shrink-0 bg-white p-3 rounded-md text-black dark:bg-slate-900"
             >
-              <div className=" px-3 py-3 bg-white rounded-lg flex-shrink-0 shadow text-sm  border border-black">
+              <div className=" px-3 py-3 bg-white rounded-lg flex-shrink-0 shadow text-sm  border border-black dark:bg-slate-800 dark:text-zinc-50">
                 <div className="text-justify flex gap-4 ">
                   {" "}
                   <span className="font-semibold bg-purple-200 rounded px-2 text-purple-600 text-sm">

@@ -66,24 +66,24 @@ const MatchModal = () => {
             <div className="bg-black rounded">
               <ModalHeader >
                 <div className="text-2xl rounded font-mono px-1 font-semibold"></div>
-                {match?.teams[0] ? (<div className="flex text-white gap-1">
+                <div className="flex text-white gap-1">
                   {match?.teams[0]?.name}
                   <h1> VS </h1>
                   {match?.teams[1]?.name}
                 </div>
-                ) : ("")}
                 <div className="my-2">
-                  <div className="flex text-white gap-2 items-center">
+                  <div className="flex text-white gap-2 items-center justify-between">
                     <p className="font-bold text-white text-lg">Scores</p>
-                    <button onClick={fetchMatch}>
+                    <button onClick={fetchMatch} className="flex items-center text-sm gap-1">
                       <ArrowPathIcon className="text-white w-4 h-4" />
+                      <span>Refresh</span>
                     </button>
                   </div>
                   <div className="ml-4 ">
                     <div className="flex text-white items-center gap-2">
                       <div>
                         <span className=" text-white font-semibold">
-                          {match?.teams[0].name}:{"  "}
+                          {match?.teams[0].name} -{"  "}
                         </span>
                         {match?.score[match?.teams[0].name]}
                       </div>
@@ -91,15 +91,14 @@ const MatchModal = () => {
                     <div className="flex text-white items-center gap-2">
                       <div className="text-white">
                         <span className=" text-white font-semibold">
-                          {match?.teams[1].name}:{"  "}
+                          {match?.teams[1].name} -{"  "}
                         </span>
-                        <span className="text-white"> {match?.score[match?.teams[1].name]} </span>
+                        {match?.score[match?.teams[1].name]}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="text-justify text-xs text-white flex">
-                  {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

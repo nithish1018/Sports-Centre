@@ -5,7 +5,9 @@ import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/images/logo.jpg";
 import { Link } from "react-router-dom";
 
-const userNavigation = [{ name: "Sign out", href: "/logout" }];
+const userNavigation = [{ name: "Sign out", href: "/logout" },
+
+{name: "Reset Password", href: "resetPassword"}];
 const userData = JSON.parse(localStorage.getItem("userData") || "{}");
 
 const classNames = (...classes: string[]): string =>

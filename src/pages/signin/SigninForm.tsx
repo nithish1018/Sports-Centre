@@ -34,8 +34,10 @@ const SigninForm: React.FC = () => {
       console.log("Sign-in successful");
       const data = await response.json();
 
-      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("authToken", data.auth_token);
+      console.log(data?.auth_token)
       localStorage.setItem("userData", JSON.stringify(data.user));
+      console.log(localStorage.getItem("authToken"));
 
       nav("/home/matches");
     } catch (error) {

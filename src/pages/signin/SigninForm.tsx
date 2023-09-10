@@ -2,7 +2,7 @@ import React from "react";
 // Dialogue 1: First we will import the API_ENDPOINT constant from the `config` folder
 import { API_ENDPOINT } from "../../config/constants";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import myGIF from "../../assets/Gifs/login.gif";
 import { toast } from "react-toastify";
 
@@ -31,7 +31,7 @@ const SigninForm: React.FC = () => {
       if (!response.ok) {
         toast.error("Invalid Username/Password", { theme: "dark" });
         throw new Error("Sign-in failed");
-      } else{
+      } else {
         toast.success("Sign-In Successful")
       }
 
@@ -97,9 +97,9 @@ const SigninForm: React.FC = () => {
             </button>
             <p style={{ fontStyle: "italic" }}>
               Don't have accont?{" "}
-              <a href="/signup" className="text-green-300">
+              <Link to="/signup" className="text-green-600">
                 Signup here
-              </a>
+              </Link>
             </p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-type Games = {
+export type Games = {
   id: number;
   name: string;
   location: string;

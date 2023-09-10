@@ -28,15 +28,15 @@ export default function Articles() {
   }
   const [sports, setSports] = useState<Sports[]>([]);
 
-  useEffect(() => {
-    const fetchSports = async () => {
-      const data = await fetch(`${API_ENDPOINT}/sports`, {
-        method: "GET"
-      });
-      const jsonData = await data.json();
-      setSports(jsonData.sports);
-    };
+  const fetchSports = async () => {
+    const data = await fetch(`${API_ENDPOINT}/sports`, {
+      method: "GET"
+    });
+    const jsonData = await data.json();
+    setSports(jsonData.sports);
+  };
 
+  useEffect(() => {
     fetchSports();
   }, []);
   console.log(sports)

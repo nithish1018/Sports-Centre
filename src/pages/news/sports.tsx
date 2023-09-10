@@ -1,19 +1,26 @@
 import { Link } from "react-router-dom";
 import { useGamesState } from "../../context/Games/context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGamesDispatch } from "../../context/Games/context";
 import { fetchGames } from "../../context/Games/actions";
 import { Waveform } from "@uiball/loaders";
+import { Preferences, fetchPreferences } from "../../utils/utils";
+import { Games } from "../../context/Games/reducer";
 
 export default function LiveGames() {
   const GameDispatch = useGamesDispatch();
+  const [userPreferences, setUserPreferences] = useState<Preferences>();
+
   useEffect(() => {
-    const test = fetchGames(GameDispatch);
-    console.log(test);
+    fetchGames(GameDispatch);
+    fetchPreferences().then(data => {
+      console.log({ data });
+      setUserPreferences(data)
+    });
   }, [GameDispatch]);
   let state: any = useGamesState();
   const { games, isLoading, isError, errorMessage } = state || {};
-  console.log(games);
+  console.log({ games });
   if (games.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
@@ -22,21 +29,21 @@ export default function LiveGames() {
     return <span>{errorMessage}</span>;
   }
 
-  const sortedGames = [...games].sort((a, b) => b.isRunning - a.isRunning);
+  const sortedAndFilteredGames = games.filter((game: Games) => userPreferences?.userPreferences.games.length === 0 || userPreferences?.userPreferences.games.includes(game.sportName)).sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
   return (
-  
+
     <div>
       <div>
-      <h1 className="text-xl p-2 text-justify font-mono font-semibold">
-        {" "}
-        Live Games
-      </h1>
+        <h1 className="text-xl p-2 text-justify font-mono font-semibold">
+          {" "}
+          Live Games
+        </h1>
       </div>
-    
+
       <div className="flex gap-4  overflow-x-auto w-full vertical-scroll">
-        {sortedGames &&
-          sortedGames.map((Game) => (
+        {sortedAndFilteredGames &&
+          sortedAndFilteredGames.map((Game: Games) => (
             <Link
               to={`matches/${Game.id}`}
               key={Game.id}
@@ -100,8 +107,8 @@ export default function LiveGames() {
             </Link>
           ))}
       </div>
-   
+
     </div>
-    
+
   );
 }

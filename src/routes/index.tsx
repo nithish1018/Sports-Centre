@@ -8,6 +8,7 @@ import ArticleModal from "../pages/modals/ArticleModal";
 import Logout from "../logout";
 import Home from "../pages/index";
 import ResetPassword from "../pages/signin/ResetPassword";
+import UserPreferences from "../pages/preferences";
 
 const router = createBrowserRouter([
   {
@@ -33,8 +34,12 @@ const router = createBrowserRouter([
             ],
           },
           {
-            path:"resetPassword",
-            element:<ResetPassword/>
+            path: "resetPassword",
+            element: <ResetPassword />
+          },
+          {
+            path: "preferences",
+            element: <UserPreferences />
           },
           {
             path: "articles",

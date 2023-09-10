@@ -25,13 +25,16 @@ export default function LiveGames() {
   const sortedGames = [...games].sort((a, b) => b.isRunning - a.isRunning);
 
   return (
+  
     <div>
+      <div>
       <h1 className="text-xl p-2 text-justify font-mono font-semibold">
         {" "}
         Live Games
       </h1>
-
-      <div className="flex gap-4 overflow-x-auto w-full">
+      </div>
+    
+      <div className="flex gap-4  overflow-x-auto w-full vertical-scroll">
         {sortedGames &&
           sortedGames.map((Game) => (
             <Link
@@ -97,6 +100,8 @@ export default function LiveGames() {
             </Link>
           ))}
       </div>
+   
     </div>
+    
   );
 }

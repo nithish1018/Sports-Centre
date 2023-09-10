@@ -29,7 +29,7 @@ const SigninForm: React.FC = () => {
       });
 
       if (!response.ok) {
-        toast.error("Invalid Username/Password");
+        toast.error("Invalid Username/Password", { theme: "dark" });
         throw new Error("Sign-in failed");
       } else{
         toast.success("Sign-In Successful")

@@ -5,9 +5,11 @@ import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/images/logo.jpg";
 import { Link } from "react-router-dom";
 
-const userNavigation = [{ name: "Sign out", href: "/logout" },
-
-{name: "Reset Password", href: "resetPassword"}];
+const userNavigation = [
+  {name:'Preferences',href:"preferences"},
+  { name: "Reset Password", href: "resetPassword" },
+{ name: "Sign out", href: "/logout" }
+];
 const userData = JSON.parse(localStorage.getItem("userData") || "{}");
 
 const classNames = (...classes: string[]): string =>
@@ -32,7 +34,7 @@ const Appbar = () => {
   return (
     <>
       <Disclosure as="nav" className="border-b border-slate-300">
-        {({}) => (
+        {({ }) => (
           <div>
             <div className="flex px-6 justify-between">
               <div className="flex items-center">
@@ -64,9 +66,9 @@ const Appbar = () => {
                   <div className="ml-4 flex items-center md:ml-6">
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="rounded-full bg-white p-1 text-gray-400 hover:text-blue-600">
+                        <Menu.Button className="rounded-full bg-white p-1 text-gray-400 hover:text-blue-600 dark:bg-black">
                           <UserCircleIcon
-                            className="h-6 w-6"
+                            className="h-6 w-6 dark:bg-black"
                             aria-hidden="true"
                           />
                         </Menu.Button>
@@ -87,7 +89,7 @@ const Appbar = () => {
                                 <a
                                   href={item.href}
                                   className={classNames(
-                                    active ? "bg-gray-100" : "",
+                                    active ? "bg-gray-300 rounded" : "",
                                     "block px-4 py-2 text-sm text-gray-700",
                                   )}
                                 >

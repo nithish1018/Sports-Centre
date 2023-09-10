@@ -3,8 +3,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import { useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from '../../config/constants';
 import { fetchPreferences, updatePreferences } from '../../utils/utils';
-import { useGamesDispatch } from '../../context/Games/context';
-import { useArticlesDispatch } from '../../context/Articles/context';
+// import { useGamesDispatch } from '../../context/Games/context';
+// import { useArticlesDispatch } from '../../context/Articles/context';
 
 type sport = {
     id: number,

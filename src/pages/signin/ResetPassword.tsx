@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import { Dialog } from '@headlessui/react'
+import { Fragment, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { API_ENDPOINT } from '../../config/constants';
 import { useNavigate } from "react-router-dom";
 
-// const nav = useNavigate();
+
 type Inputs={
     current_password:string;
     new_password:string;
@@ -12,6 +12,7 @@ type Inputs={
 }
 
 function ResetPassword() {
+    const nav = useNavigate();
     let [isOpen, setIsOpen] = useState(true)
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const closeModal = () => {
@@ -41,18 +42,41 @@ function ResetPassword() {
                 throw new Error("Rest Password Failed");
             }
       
-            // nav("/home/matches");
+            nav("/home/matches");
           } catch (error) {
             console.error("Reset Password Failed:", error);
           }
     }
 
     return (
-        <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-            <Dialog.Panel>
-                <Dialog.Title>Reset Your Password</Dialog.Title>
+        <>
+        <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">Reset Your Password</Dialog.Title>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    {/* I'll show the error, if it exists.*/}
                     {error &&
                         <span>{error}</span>
                     }
@@ -82,7 +106,12 @@ function ResetPassword() {
                     </button>
                 </form>
             </Dialog.Panel>
+            </Transition.Child>
+            </div>
+            </div>
         </Dialog>
+        </Transition>
+        </>
     )
 }
 export default ResetPassword;

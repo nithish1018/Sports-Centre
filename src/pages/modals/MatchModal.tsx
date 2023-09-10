@@ -13,7 +13,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-
 } from "@chakra-ui/react";
 
 type Team = {
@@ -40,7 +39,6 @@ const MatchModal = () => {
   const { matchID } = useParams();
   const navigate = useNavigate();
 
-
   const fetchMatch = () => {
     fetch(`${API_ENDPOINT}/matches/${matchID}`)
       .then((res) => res.json())
@@ -64,7 +62,7 @@ const MatchModal = () => {
         <ModalContent>
           <div className="rounded">
             <div className="bg-black rounded">
-              <ModalHeader >
+              <ModalHeader>
                 <div className="text-2xl rounded font-mono px-1 font-semibold"></div>
                 <div className="flex text-white gap-1">
                   {match?.teams[0]?.name}
@@ -74,7 +72,10 @@ const MatchModal = () => {
                 <div className="my-2">
                   <div className="flex text-white gap-2 items-center justify-between">
                     <p className="font-bold text-white text-lg">Scores</p>
-                    <button onClick={fetchMatch} className="flex items-center text-sm gap-1">
+                    <button
+                      onClick={fetchMatch}
+                      className="flex items-center text-sm gap-1"
+                    >
                       <ArrowPathIcon className="text-white w-4 h-4" />
                       <span>Refresh</span>
                     </button>
@@ -159,7 +160,6 @@ const MatchModal = () => {
                 <p className="font-bold text-lg">Story</p>
                 <p>{match?.story}</p>
               </div>
-
             </ModalBody>
             <ModalFooter>
               <Button onClick={onClose}>Close</Button>

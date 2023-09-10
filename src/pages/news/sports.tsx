@@ -13,9 +13,9 @@ export default function LiveGames() {
 
   useEffect(() => {
     fetchGames(GameDispatch);
-    fetchPreferences().then(data => {
+    fetchPreferences().then((data) => {
       console.log({ data });
-      setUserPreferences(data)
+      setUserPreferences(data);
     });
   }, [GameDispatch]);
   let state: any = useGamesState();
@@ -29,10 +29,15 @@ export default function LiveGames() {
     return <span>{errorMessage}</span>;
   }
 
-  const sortedAndFilteredGames = games.filter((game: Games) => userPreferences?.userPreferences.games.length === 0 || userPreferences?.userPreferences.games.includes(game.sportName)).sort((a: Games, b: Games) => b.isRunning - a.isRunning);
+  const sortedAndFilteredGames = games
+    .filter(
+      (game: Games) =>
+        userPreferences?.userPreferences.games.length === 0 ||
+        userPreferences?.userPreferences.games.includes(game.sportName),
+    )
+    .sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
   return (
-
     <div>
       <div>
         <h1 className="text-xl p-2 text-justify font-mono font-semibold">
@@ -107,8 +112,6 @@ export default function LiveGames() {
             </Link>
           ))}
       </div>
-
     </div>
-
   );
 }

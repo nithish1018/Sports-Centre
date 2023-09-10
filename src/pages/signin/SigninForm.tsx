@@ -32,14 +32,14 @@ const SigninForm: React.FC = () => {
         toast.error("Invalid Username/Password", { theme: "dark" });
         throw new Error("Sign-in failed");
       } else {
-        toast.success("Sign-In Successful")
+        toast.success("Sign-In Successful");
       }
 
       console.log("Sign-in successful");
       const data = await response.json();
 
       localStorage.setItem("authToken", data.auth_token);
-      console.log(data?.auth_token)
+      console.log(data?.auth_token);
       localStorage.setItem("userData", JSON.stringify(data.user));
       console.log(localStorage.getItem("authToken"));
 

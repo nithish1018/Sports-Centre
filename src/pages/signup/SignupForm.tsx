@@ -33,9 +33,9 @@ const SignupForm: React.FC = () => {
       });
 
       if (!response.ok) {
-        toast.error("Sign-up Failed, Try Again")
+        toast.error("Sign-up Failed, Try Again");
         throw new Error("Sign-up Failed");
-      } else{
+      } else {
         toast.success("Sign-up successful");
       }
       console.log("Sign-up successful");

@@ -24,8 +24,11 @@ const Hello: React.FC = () => {
               recent reports, results, and evaluations from the sports world? If
               the answer is yes, you've found the proper site.
             </p>{" "}
-            <a className="font-bold dark:text-white"> Welcome to Sports Prime</a>
-            <br/>
+            <a className="font-bold dark:text-white">
+              {" "}
+              Welcome to Sports Prime
+            </a>
+            <br />
             <div className="flex justify-center">
               <Link to="/signin">
                 {" "}

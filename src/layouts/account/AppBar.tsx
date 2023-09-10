@@ -6,9 +6,9 @@ import Logo from "../../assets/images/logo.jpg";
 import { Link } from "react-router-dom";
 
 const userNavigation = [
-  { name: 'Preferences', href: "/home/preferences" },
+  { name: "Preferences", href: "/home/preferences" },
   { name: "Reset Password", href: "resetPassword" },
-  { name: "Sign out", href: "/logout" }
+  { name: "Sign out", href: "/logout" },
 ];
 const userData = JSON.parse(localStorage.getItem("userData") || "{}");
 
@@ -34,7 +34,7 @@ const Appbar = () => {
   return (
     <>
       <Disclosure as="nav" className="border-b border-slate-300">
-        {({ }) => (
+        {({}) => (
           <div>
             <div className="flex px-6 justify-between">
               <div className="flex items-center">

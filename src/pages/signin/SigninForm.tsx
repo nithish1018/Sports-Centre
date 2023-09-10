@@ -4,6 +4,7 @@ import { API_ENDPOINT } from "../../config/constants";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import myGIF from "../../assets/Gifs/login.gif";
+import { toast } from "react-toastify";
 
 type Inputs = {
   email: string;
@@ -28,7 +29,10 @@ const SigninForm: React.FC = () => {
       });
 
       if (!response.ok) {
+        toast.error("Invalid Username/Password");
         throw new Error("Sign-in failed");
+      } else{
+        toast.success("Sign-In Successful")
       }
 
       console.log("Sign-in successful");

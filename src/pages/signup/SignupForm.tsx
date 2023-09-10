@@ -3,6 +3,7 @@ import { API_ENDPOINT } from "../../config/constants";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import myGIF from "../../assets/Gifs/create-account.gif";
+import { toast } from "react-toastify";
 
 type Inputs = {
   name: string;
@@ -32,7 +33,10 @@ const SignupForm: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Sign-up failed");
+        toast.error("Sign-up Failed, Try Again")
+        throw new Error("Sign-up Failed");
+      } else{
+        toast.success("Sign-up successful");
       }
       console.log("Sign-up successful");
       const data = await response.json();

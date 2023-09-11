@@ -5,6 +5,11 @@ import { useEffect, useState } from "react";
 import { fetchArticles } from "../../context/Articles/actions";
 import { Tab } from "@headlessui/react";
 import { API_ENDPOINT } from "../../config/constants";
+// import { Games } from "../../context/Games/reducer";
+import { useGamesDispatch } from "../../context/Games/context";
+import { Preferences, fetchPreferences } from "../../utils/utils";
+import { fetchGames } from "../../context/Games/actions";
+import { ArticleInfo } from "../../context/Articles/reducer";
 
 export default function Articles() {
   const ArticleDispatch = useArticlesDispatch();
@@ -44,6 +49,23 @@ export default function Articles() {
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join("");
   }
+  const GameDispatch = useGamesDispatch();
+  useEffect(() => {
+    fetchGames(GameDispatch);
+    fetchPreferences().then((data) => {
+      console.log({ data });
+      setUserPreferences(data);
+    });
+  }, [GameDispatch]);
+  const [userPreferences, setUserPreferences] = useState<Preferences>();
+
+  const sortedAndFilteredArticles = articles
+    .filter(
+      (article: ArticleInfo) =>
+        userPreferences?.userPreferences.games.length === 0 ||
+        userPreferences?.userPreferences.games.includes(article.sport.name),
+    )
+  console.log(sortedAndFilteredArticles);
   return (
     <div className="w-fullx-wpx-2 py-16 sm:px-0">
       <h1 className="text-xl px-2 text-justify font-mono font-semibold">
@@ -74,8 +96,8 @@ export default function Articles() {
             let flag = true;
             return (
               <Tab.Panel key={idx}>
-                {articles &&
-                  articles.map(
+                {sortedAndFilteredArticles &&
+                  sortedAndFilteredArticles.map(
                     (article: {
                       id: number;
                       thumbnail: string;

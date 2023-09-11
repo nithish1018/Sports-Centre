@@ -1,4 +1,4 @@
-type Sport = {
+export type Sport = {
   id: number;
   name: string;
 };
@@ -7,7 +7,7 @@ type Teams = {
   name: string;
 };
 
-type Articles = {
+export type ArticleInfo = {
   id: number;
   title: string;
   thumbnail: string;
@@ -17,14 +17,14 @@ type Articles = {
   teams: Teams[];
 };
 export interface ArticlesState {
-  articles: Articles[];
+  articles: ArticleInfo[];
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
 }
 export type ArticlesActions =
   | { type: "FETCH_ARTICLES_REQUEST" }
-  | { type: "FETCH_ARTICLES_SUCCESS"; payload: Articles[] }
+  | { type: "FETCH_ARTICLES_SUCCESS"; payload: ArticleInfo[] }
   | { type: "FETCH_ARTICLES_FAILURE"; payload: string };
 
 export const initialState: ArticlesState = {

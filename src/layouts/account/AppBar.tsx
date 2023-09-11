@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const userNavigation = [
   { name: "Preferences", href: "/home/preferences" },
-  { name: "Reset Password", href: "resetPassword" },
+  { name: "Reset Password", href: "/home/resetPassword" },
   { name: "Sign out", href: "/logout" },
 ];
 const userData = JSON.parse(localStorage.getItem("userData") || "{}");
@@ -34,7 +34,7 @@ const Appbar = () => {
   return (
     <>
       <Disclosure as="nav" className="border-b border-slate-300">
-        {({}) => (
+        {({ }) => (
           <div>
             <div className="flex px-6 justify-between">
               <div className="flex items-center">

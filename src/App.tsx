@@ -10,18 +10,7 @@ function App() {
   return (
     <div className={`h-screen py-2 ${theme === "dark" ? "dark" : ""}`}>
       <RouterProvider router={router} />
-      <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+      <ToastContainer />
       <ToastContainer />
     </div>
   );

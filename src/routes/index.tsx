@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 import Signin from "../pages/signin";
 import SignupForm from "../pages/signup";
 import Hello from "../pages/index/Hello";
@@ -35,11 +36,19 @@ const router = createBrowserRouter([
           },
           {
             path: "resetPassword",
-            element: <ResetPassword />,
+            element: (
+              <ProtectedRoute>
+                <ResetPassword />
+              </ProtectedRoute>
+            ),
           },
           {
             path: "preferences",
-            element: <UserPreferences />,
+            element: (
+              <ProtectedRoute>
+                <UserPreferences />
+              </ProtectedRoute>
+            )
           },
           {
             path: "articles",

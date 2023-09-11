@@ -59,12 +59,11 @@ export default function Articles() {
   }, [GameDispatch]);
   const [userPreferences, setUserPreferences] = useState<Preferences>();
 
-  const sortedAndFilteredArticles = articles
-    .filter(
-      (article: ArticleInfo) =>
-        userPreferences?.userPreferences.games.length === 0 ||
-        userPreferences?.userPreferences.games.includes(article.sport.name),
-    )
+  const sortedAndFilteredArticles = articles.filter(
+    (article: ArticleInfo) =>
+      userPreferences?.userPreferences.games.length === 0 ||
+      userPreferences?.userPreferences.games.includes(article.sport.name),
+  );
   console.log(sortedAndFilteredArticles);
   return (
     <div className="w-fullx-wpx-2 py-16 sm:px-0">

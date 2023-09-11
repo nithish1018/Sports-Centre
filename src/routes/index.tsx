@@ -49,7 +49,7 @@ const router = createBrowserRouter([
               <ProtectedRoute>
                 <UserPreferences />
               </ProtectedRoute>
-            )
+            ),
           },
           {
             path: "articles",

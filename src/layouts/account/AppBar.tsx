@@ -34,7 +34,7 @@ const Appbar = () => {
   return (
     <>
       <Disclosure as="nav" className="border-b border-slate-300">
-        {({ }) => (
+        {({}) => (
           <div>
             <div className="flex px-6 justify-between">
               <div className="flex items-center">

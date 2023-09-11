@@ -10,6 +10,7 @@ import Logout from "../logout";
 import Home from "../pages/index";
 import ResetPassword from "../pages/signin/ResetPassword";
 import UserPreferences from "../pages/preferences";
+import Notfound from "../pages/NotFound/Notfound";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
   {
     path: "/logout",
     element: <Logout />,
+  },
+  {
+    path: "*",
+    element: <Notfound />,
   },
 ]);
 

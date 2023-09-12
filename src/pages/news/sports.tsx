@@ -28,7 +28,7 @@ export default function LiveGames() {
   if (isError) {
     return <span>{errorMessage}</span>;
   }
-  const sortedGames = games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
+  // const sortedGames = games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
   const sortedAndFilteredGames = games
     .filter(

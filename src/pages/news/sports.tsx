@@ -28,12 +28,13 @@ export default function LiveGames() {
   if (isError) {
     return <span>{errorMessage}</span>;
   }
+  const sortedGames = games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
   const sortedAndFilteredGames = games
     .filter(
       (game: Games) =>
-        userPreferences?.userPreferences.games.length === 0 ||
-        userPreferences?.userPreferences.games.includes(game.sportName),
+        userPreferences?.userPreferences && (userPreferences?.userPreferences.games.length === 0 ||
+          userPreferences?.userPreferences.games.includes(game.sportName)),
     )
     .sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 

@@ -36,7 +36,8 @@ export default function LiveGames() {
     .filter(
       (game: Games) =>
         userPreferences?.userPreferences && (userPreferences?.userPreferences.games.length === 0 ||
-          userPreferences?.userPreferences.games.includes(game.sportName)),
+          (userPreferences?.userPreferences.games.includes(game.sportName)) && userPreferences?.userPreferences.teams.includes(game.id)),
+
     )
     .sort((a: Games, b: Games) => b.isRunning - a.isRunning) : games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 

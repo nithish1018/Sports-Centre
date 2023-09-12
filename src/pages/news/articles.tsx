@@ -22,7 +22,7 @@ export default function Articles() {
   }, []);
   let state: any = useArticlesState();
   const { articles, isLoading, isError, errorMessage } = state || {};
-  if (articles.length === 0 && isLoading) {
+  if ((articles.length === 0 && isLoading)) {
     return <span>Loading...</span>;
   }
 
@@ -57,7 +57,7 @@ export default function Articles() {
     .filter(
       (article: ArticleInfo) =>
         userPreferences?.userPreferences && (userPreferences?.userPreferences.games.length === 0 ||
-          userPreferences?.userPreferences.games.includes(article.sport.name)),
+          (userPreferences?.userPreferences.games.includes(article.sport.name)) && userPreferences?.userPreferences.teams.includes(article.teams[0].id)),
     )
     .sort((a: Games, b: Games) => b.isRunning - a.isRunning) : articles.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 

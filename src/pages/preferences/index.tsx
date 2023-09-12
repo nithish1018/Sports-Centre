@@ -27,6 +27,7 @@ function UserPreferences() {
   const closeModal = () => {
     setIsOpen(false);
     nav("/home/matches");
+    window.location.reload()
   };
 
   const fetchSports = async () => {

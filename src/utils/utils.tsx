@@ -50,8 +50,10 @@ export const updatePreferences = async (preferences: Preferences) => {
     }),
   });
   if (res.ok) {
+
     toast.success("Preferences Updated!!");
   } else {
     toast.error("Preferences Update Failed, Try Again");
   }
+  // window.location.reload();
 };

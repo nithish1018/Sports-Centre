@@ -22,16 +22,16 @@ export const fetchPreferences = async () => {
     updatePreferences({
       userPreferences: {
         games: [],
-        teams: []
-      }
+        teams: [],
+      },
     });
 
     return {
       userPreferences: {
         games: [],
-        teams: []
-      }
-    }
+        teams: [],
+      },
+    };
   } else {
     return data.preferences;
   }
@@ -50,7 +50,6 @@ export const updatePreferences = async (preferences: Preferences) => {
     }),
   });
   if (res.ok) {
-
     toast.success("Preferences Updated!!");
   } else {
     toast.error("Preferences Update Failed, Try Again");

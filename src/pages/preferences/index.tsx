@@ -1,8 +1,9 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "../../config/constants";
 import { fetchPreferences, updatePreferences } from "../../utils/utils";
+import { PreferencesContext } from "../../context/preferences";
 
 type sport = {
   id: number;
@@ -22,12 +23,12 @@ function UserPreferences() {
   const [teams, setTeams] = useState<team[]>([]);
   const [selectedGames, setSelectedGames] = useState<string[]>([]);
   const [selectedTeams, setSelectedTeams] = useState<number[]>([]);
+  const { setPreferences } = useContext(PreferencesContext);
   let [isOpen, setIsOpen] = useState(true);
 
   const closeModal = () => {
     setIsOpen(false);
     nav("/home/matches");
-    window.location.reload()
   };
 
   const fetchSports = async () => {
@@ -55,8 +56,8 @@ function UserPreferences() {
         updatePreferences({
           userPreferences: {
             games: [],
-            teams: []
-          }
+            teams: [],
+          },
         });
         setSelectedGames([]);
         setSelectedTeams([]);
@@ -198,6 +199,9 @@ function UserPreferences() {
                               games: selectedGames,
                               teams: selectedTeams,
                             },
+                          });
+                          fetchPreferences().then((data) => {
+                            setPreferences(data);
                           });
                           closeModal();
                         }}

@@ -5,15 +5,18 @@ import { ThemeProvider } from "./context/theme.tsx";
 import { GamesProvider } from "./context/Games/context.tsx";
 import { ArticlesProvider } from "./context/Articles/context.tsx";
 import { ChakraProvider } from "@chakra-ui/react";
+import { PreferencesProvider } from "./context/preferences.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider>
-    <ArticlesProvider>
-      <GamesProvider>
-        <ChakraProvider>
-          <App />
-        </ChakraProvider>
-      </GamesProvider>
-    </ArticlesProvider>
+    <PreferencesProvider>
+      <ArticlesProvider>
+        <GamesProvider>
+          <ChakraProvider>
+            <App />
+          </ChakraProvider>
+        </GamesProvider>
+      </ArticlesProvider>
+    </PreferencesProvider>
   </ThemeProvider>,
 );

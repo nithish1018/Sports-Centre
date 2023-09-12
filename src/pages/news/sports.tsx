@@ -1,28 +1,27 @@
 import { Link } from "react-router-dom";
 import { useGamesState } from "../../context/Games/context";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { useGamesDispatch } from "../../context/Games/context";
 import { fetchGames } from "../../context/Games/actions";
 import { Waveform } from "@uiball/loaders";
-import { Preferences, fetchPreferences } from "../../utils/utils";
+import { fetchPreferences } from "../../utils/utils";
 import { Games } from "../../context/Games/reducer";
+import { PreferencesContext } from "../../context/preferences";
 
 export default function LiveGames() {
+  const { preferences, setPreferences } = useContext(PreferencesContext);
   const GameDispatch = useGamesDispatch();
-  const [userPreferences, setUserPreferences] = useState<Preferences>();
   const isAuth = !!localStorage.getItem("authToken");
-
 
   useEffect(() => {
     fetchGames(GameDispatch);
-    isAuth && fetchPreferences().then((data) => {
-      console.log({ data });
-      setUserPreferences(data);
-    });
-  }, [GameDispatch]);
+    isAuth &&
+      fetchPreferences().then((data) => {
+        setPreferences(data);
+      });
+  }, []);
   let state: any = useGamesState();
   const { games, isLoading, isError, errorMessage } = state || {};
-  console.log({ games });
   if (games.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
@@ -30,21 +29,29 @@ export default function LiveGames() {
   if (isError) {
     return <span>{errorMessage}</span>;
   }
-  // const sortedGames = games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
-  const sortedAndFilteredGames = isAuth ? games
-    .filter(
-      (game: Games) =>
-        userPreferences?.userPreferences && (userPreferences?.userPreferences.games.length === 0 ||
-          (userPreferences?.userPreferences.games.includes(game.sportName)) && userPreferences?.userPreferences.teams.includes(game.id)),
+  const filteredBySport = games.filter(
+    (game: Games) =>
+      preferences?.userPreferences &&
+      (preferences?.userPreferences.games.length === 0 ||
+        preferences?.userPreferences.games.includes(game.sportName)),
+  );
 
-    )
-    .filter(
-      (game: Games) =>
-        userPreferences?.userPreferences && (userPreferences?.userPreferences.teams.length === 0 ||
-          userPreferences?.userPreferences.teams.includes(game.teams[0] ? game.teams[0].id : -1) || userPreferences?.userPreferences.teams.includes(game.teams[1] ? game.teams[1].id : -1)
-        ))
-    .sort((a: Games, b: Games) => b.isRunning - a.isRunning) : games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
+  const filteredByTeam = filteredBySport.filter(
+    (game: Games) =>
+      preferences?.userPreferences &&
+      (preferences?.userPreferences.teams.length === 0 ||
+        preferences?.userPreferences.teams.includes(
+          game.teams[0] ? game.teams[0].id : -1,
+        ) ||
+        preferences?.userPreferences.teams.includes(
+          game.teams[1] ? game.teams[1].id : -1,
+        )),
+  );
+
+  const sortedAndFilteredGames = isAuth
+    ? filteredByTeam.sort((a: Games, b: Games) => b.isRunning - a.isRunning)
+    : games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
   return (
     <div>

@@ -14,7 +14,6 @@ const Home = () => {
       </ErrorBoundary>
       <ErrorBoundary>
         <Suspense fallback={<div className="suspense-loading">Loading...</div>}>
-
           <Articles />
         </Suspense>
       </ErrorBoundary>

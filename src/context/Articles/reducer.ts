@@ -2,7 +2,7 @@ export type Sport = {
   id: number;
   name: string;
 };
-type Teams = {
+export type Teams = {
   id: number;
   name: string;
 };

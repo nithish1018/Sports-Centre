@@ -50,8 +50,19 @@ function UserPreferences() {
     fetchSports();
     fetchTeams();
     fetchPreferences().then((preferences) => {
-      setSelectedGames(preferences.userPreferences.games);
-      setSelectedTeams(preferences.userPreferences.teams);
+      if (!preferences.userPreferences) {
+        updatePreferences({
+          userPreferences: {
+            games: [],
+            teams: []
+          }
+        });
+        setSelectedGames([]);
+        setSelectedTeams([]);
+      } else {
+        setSelectedGames(preferences.userPreferences.games);
+        setSelectedTeams(preferences.userPreferences.teams);
+      }
       setLoading(false);
     });
   }, []);

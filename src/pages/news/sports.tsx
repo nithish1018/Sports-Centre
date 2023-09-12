@@ -10,10 +10,12 @@ import { Games } from "../../context/Games/reducer";
 export default function LiveGames() {
   const GameDispatch = useGamesDispatch();
   const [userPreferences, setUserPreferences] = useState<Preferences>();
+  const isAuth = !!localStorage.getItem("authToken");
+
 
   useEffect(() => {
     fetchGames(GameDispatch);
-    fetchPreferences().then((data) => {
+    isAuth && fetchPreferences().then((data) => {
       console.log({ data });
       setUserPreferences(data);
     });
@@ -30,13 +32,13 @@ export default function LiveGames() {
   }
   // const sortedGames = games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
-  const sortedAndFilteredGames = games
+  const sortedAndFilteredGames = isAuth ? games
     .filter(
       (game: Games) =>
         userPreferences?.userPreferences && (userPreferences?.userPreferences.games.length === 0 ||
           userPreferences?.userPreferences.games.includes(game.sportName)),
     )
-    .sort((a: Games, b: Games) => b.isRunning - a.isRunning);
+    .sort((a: Games, b: Games) => b.isRunning - a.isRunning) : games.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
   return (
     <div>

@@ -18,7 +18,23 @@ export const fetchPreferences = async () => {
     },
   });
   const data: { preferences: Preferences } = await res.json();
-  return data.preferences;
+  if (!data.preferences.userPreferences) {
+    updatePreferences({
+      userPreferences: {
+        games: [],
+        teams: []
+      }
+    });
+
+    return {
+      userPreferences: {
+        games: [],
+        teams: []
+      }
+    }
+  } else {
+    return data.preferences;
+  }
 };
 
 export const updatePreferences = async (preferences: Preferences) => {

@@ -1,9 +1,16 @@
+export type Team = {
+  id: number;
+  name: string;
+  plays: string;
+};
+
 export type Games = {
   id: number;
   name: string;
   location: string;
   sportName: string;
   isRunning: any;
+  teams: Team[];
 };
 export interface GamesState {
   games: Games[];

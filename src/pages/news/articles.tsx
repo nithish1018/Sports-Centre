@@ -57,8 +57,13 @@ export default function Articles() {
     .filter(
       (article: ArticleInfo) =>
         userPreferences?.userPreferences && (userPreferences?.userPreferences.games.length === 0 ||
-          (userPreferences?.userPreferences.games.includes(article.sport.name)) && userPreferences?.userPreferences.teams.includes(article.teams[0].id)),
+          userPreferences?.userPreferences.games.includes(article.sport.name))
     )
+    .filter(
+      (article: ArticleInfo) =>
+        userPreferences?.userPreferences && (userPreferences?.userPreferences.teams.length === 0 ||
+          userPreferences?.userPreferences.teams.includes(article.teams[0] ? article.teams[0].id : -1) || userPreferences?.userPreferences.teams.includes(article.teams[1] ? article.teams[1].id : -1)
+        ))
     .sort((a: Games, b: Games) => b.isRunning - a.isRunning) : articles.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
   const filteredSports = isAuth ? sports.filter(sport => userPreferences?.userPreferences && (userPreferences.userPreferences.games.length === 0 || userPreferences.userPreferences.games.includes(sport.name))) : sports

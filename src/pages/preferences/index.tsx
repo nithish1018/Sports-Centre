@@ -93,7 +93,7 @@ function UserPreferences() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-slate-800 dark:text-zinc-50">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
@@ -147,7 +147,7 @@ function UserPreferences() {
                           ))}
                         </ul>
                       </div>
-                      <div className="mt-4 w-full">
+                      <div className="mt-4 w-full ">
                         <h3 className="my-2 font-semibold text-gray-900 dark:text-white">
                           Select teams
                         </h3>

@@ -98,8 +98,8 @@ const Appbar = () => {
                               <Link
                                 to={item.href}
                                 className={classNames(
-                                  active ? "bg-gray-300 rounded" : "",
-                                  "block px-4 py-2 text-sm text-gray-700 dark:bg-black dark:text-white",
+                                  active ? "bg-gray-300  rounded dark:bg-white dark:text-black" : "",
+                                  "block px-4 py-2 text-sm text-gray-700 dark:bg-black dark:text-white hover:dark:text-black",
                                 )}
                               >
                                 {item.name}

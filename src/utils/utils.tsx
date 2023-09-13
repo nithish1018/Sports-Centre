@@ -50,9 +50,8 @@ export const updatePreferences = async (preferences: Preferences) => {
     }),
   });
   if (res.ok) {
-    toast.success("Preferences Updated!!");
+    toast.success("Preferences Updated!!", { theme: "dark", autoClose: 1000 });
   } else {
-    toast.error("Preferences Update Failed, Try Again");
+    toast.error("Preferences Update Failed, Try Again", { theme: "dark", autoClose: 1000 });
   }
-  // window.location.reload();
 };

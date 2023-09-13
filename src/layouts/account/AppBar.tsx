@@ -5,25 +5,27 @@ import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/images/logo.jpg";
 import { Link } from "react-router-dom";
 
-const isAuth = !!localStorage.getItem("authToken");
-console.log({ isAuth });
 
-const userNavigation = isAuth
-  ? [
-    { name: "Preferences", href: "/home/preferences" },
-    { name: "Reset Password", href: "/home/resetPassword" },
-    { name: "Sign out", href: "/logout" },
-  ]
-  : [
-    { name: "Sign In", href: "/signin" },
-    { name: "Sign Up", href: "/signup" },
-  ];
+
 
 const classNames = (...classes: string[]): string =>
   classes.filter(Boolean).join(" ");
 
 const Appbar = () => {
-  // const { pathname } = useLocation()
+
+  const auth = !!localStorage.getItem("authToken");
+
+  const userNavigation = auth
+    ? [
+      { name: "Preferences", href: "/home/preferences" },
+      { name: "Reset Password", href: "/home/resetPassword" },
+      { name: "Sign out", href: "/logout" },
+    ]
+    : [
+      { name: "Sign In", href: "/signin" },
+      { name: "Sign Up", href: "/signup" },
+    ];
+
   const { theme, setTheme } = useContext(ThemeContext);
   const [enabled, setEnabled] = useState(theme === "dark");
   const toggleTheme = () => {

@@ -12,6 +12,7 @@ type Inputs = {
 };
 const SigninForm: React.FC = () => {
   const nav = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -29,10 +30,10 @@ const SigninForm: React.FC = () => {
       });
 
       if (!response.ok) {
-        toast.error("Invalid Username/Password", { theme: "dark" });
+        toast.error("Invalid Username/Password", { theme: "dark", autoClose: 1000 });
         throw new Error("Sign-in failed");
       } else {
-        toast.success("Sign-In Successful");
+        toast.success("Sign-In Successful", { theme: "dark", autoClose: 1000 });
       }
 
       console.log("Sign-in successful");
@@ -40,9 +41,7 @@ const SigninForm: React.FC = () => {
 
       localStorage.setItem("authToken", data.auth_token);
       localStorage.setItem("userData", JSON.stringify(data.user));
-
       nav("/home/matches");
-      window.location.reload();
     } catch (error) {
       console.error("Sign-in failed:", error);
     }

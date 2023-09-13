@@ -33,16 +33,16 @@ const SignupForm: React.FC = () => {
       });
 
       if (!response.ok) {
-        toast.error("Sign-up Failed, Try Again");
+        toast.error("Sign-up Failed, Try Again", { theme: "dark", autoClose: 1000 });
         throw new Error("Sign-up Failed");
       } else {
-        toast.success("Sign-up successful");
+        toast.success("Sign-up successful", { theme: "dark", autoClose: 1000 });
       }
       console.log("Sign-up successful");
       const data = await response.json();
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("userData", JSON.stringify(data.user));
-      nav("/signin");
+      nav("/home");
     } catch (error) {
       console.error("Sign-up failed:", error);
     }

@@ -98,7 +98,7 @@ function UserPreferences() {
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-slate-800 dark:text-zinc-50">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                   >
                     User Preferences
                   </Dialog.Title>
@@ -110,7 +110,7 @@ function UserPreferences() {
                         <h3 className="my-2 font-semibold text-gray-900 dark:text-white">
                           Select sports
                         </h3>
-                        <ul className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <ul className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:text-white">
                           {sports.map((sport, idx) => (
                             <li
                               key={idx}

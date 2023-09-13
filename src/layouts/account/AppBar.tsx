@@ -10,14 +10,14 @@ console.log({ isAuth });
 
 const userNavigation = isAuth
   ? [
-      { name: "Preferences", href: "/home/preferences" },
-      { name: "Reset Password", href: "/home/resetPassword" },
-      { name: "Sign out", href: "/logout" },
-    ]
+    { name: "Preferences", href: "/home/preferences" },
+    { name: "Reset Password", href: "/home/resetPassword" },
+    { name: "Sign out", href: "/logout" },
+  ]
   : [
-      { name: "Sign In", href: "/signin" },
-      { name: "Sign Up", href: "/signup" },
-    ];
+    { name: "Sign In", href: "/signin" },
+    { name: "Sign Up", href: "/signup" },
+  ];
 
 const classNames = (...classes: string[]): string =>
   classes.filter(Boolean).join(" ");
@@ -41,7 +41,7 @@ const Appbar = () => {
   return (
     <>
       <Disclosure as="nav" className="border-b border-slate-300">
-        {({}) => (
+        {({ }) => (
           <div>
             <div className="flex px-6 justify-between">
               <div className="flex items-center">
@@ -75,7 +75,7 @@ const Appbar = () => {
                     <div>
                       <Menu.Button className="rounded-full bg-white p-1 text-gray-400 hover:text-blue-600 dark:bg-black">
                         <UserCircleIcon
-                          className="h-6 w-6 dark:bg-black"
+                          className="h-6 w-6 dark:bg-black dark:text-white"
                           aria-hidden="true"
                         />
                       </Menu.Button>
@@ -97,7 +97,7 @@ const Appbar = () => {
                                 to={item.href}
                                 className={classNames(
                                   active ? "bg-gray-300 rounded" : "",
-                                  "block px-4 py-2 text-sm text-gray-700",
+                                  "block px-4 py-2 text-sm text-gray-700 dark:bg-black dark:text-white",
                                 )}
                               >
                                 {item.name}

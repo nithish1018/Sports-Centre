@@ -42,6 +42,7 @@ const SigninForm: React.FC = () => {
       localStorage.setItem("userData", JSON.stringify(data.user));
 
       nav("/home/matches");
+      window.location.reload();
     } catch (error) {
       console.error("Sign-in failed:", error);
     }

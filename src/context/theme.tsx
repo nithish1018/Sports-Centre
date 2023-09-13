@@ -5,7 +5,7 @@ interface ThemeContextProps {
 }
 const ThemeContext = createContext<ThemeContextProps>({
   theme: "light",
-  setTheme: () => {},
+  setTheme: () => { },
 });
 const ThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState("light");

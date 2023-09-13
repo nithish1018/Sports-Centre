@@ -56,33 +56,33 @@ export default function Articles() {
 
   const sortedAndFilteredArticles = isAuth
     ? articles
-        .filter(
-          (article: ArticleInfo) =>
-            preferences?.userPreferences &&
-            (preferences?.userPreferences.games.length === 0 ||
-              preferences?.userPreferences.games.includes(article.sport.name)),
-        )
-        .filter(
-          (article: ArticleInfo) =>
-            preferences?.userPreferences &&
-            (preferences?.userPreferences.teams.length === 0 ||
-              preferences?.userPreferences.teams.includes(
-                article.teams[0] ? article.teams[0].id : -1,
-              ) ||
-              preferences?.userPreferences.teams.includes(
-                article.teams[1] ? article.teams[1].id : -1,
-              )),
-        )
-        .sort((a: Games, b: Games) => b.isRunning - a.isRunning)
+      .filter(
+        (article: ArticleInfo) =>
+          preferences?.userPreferences &&
+          (preferences?.userPreferences.games.length === 0 ||
+            preferences?.userPreferences.games.includes(article.sport.name)),
+      )
+      .filter(
+        (article: ArticleInfo) =>
+          preferences?.userPreferences &&
+          (preferences?.userPreferences.teams.length === 0 ||
+            preferences?.userPreferences.teams.includes(
+              article.teams[0] ? article.teams[0].id : -1,
+            ) ||
+            preferences?.userPreferences.teams.includes(
+              article.teams[1] ? article.teams[1].id : -1,
+            )),
+      )
+      .sort((a: Games, b: Games) => b.isRunning - a.isRunning)
     : articles.sort((a: Games, b: Games) => b.isRunning - a.isRunning);
 
   const filteredSports = isAuth
     ? sports.filter(
-        (sport) =>
-          preferences?.userPreferences &&
-          (preferences.userPreferences.games.length === 0 ||
-            preferences.userPreferences.games.includes(sport.name)),
-      )
+      (sport) =>
+        preferences?.userPreferences &&
+        (preferences.userPreferences.games.length === 0 ||
+          preferences.userPreferences.games.includes(sport.name)),
+    )
     : sports;
 
   return (
@@ -186,10 +186,15 @@ export default function Articles() {
                       },
                     )}
                   {flag && (
-                    <div className="grid h-screen text-2xl place-items-center">
-                      {" "}
-                      Sorry No articles Found
-                    </div>
+                    isAuth ?
+                      <div className="grid h-screen text-2xl place-items-center">
+                        {" "}
+                        Sorry No articles Found As Per Your Preferences
+                      </div>
+                      : <div className="grid h-screen text-2xl place-items-center">
+                        {" "}
+                        Sorry No articles Found
+                      </div>
                   )}
                 </Tab.Panel>
               );

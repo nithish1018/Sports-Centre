@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 export default function Notfound() {
+
+  const isAuth = localStorage.getItem("authToken");
   return (
     <div className="flex items-center h-full text-gray-200 justify-center">
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
@@ -11,12 +13,22 @@ export default function Notfound() {
           <p className="text-2xl font-semibold md:text-3xl">
             Sorry, This page isn't available.
           </p>
-          <Link
-            to="/"
-            className="flex gap-2 items-center justify-center font-semibold text-blue-600"
-          >
-            <span>Back to homepage</span>
-          </Link>
+
+          {isAuth ? (
+            <Link
+              to="/home/matches"
+              className="flex gap-2 items-center justify-center font-semibold text-blue-600"
+            >
+              <span>Back to homepage</span>
+            </Link>
+          ) : (
+            <Link
+              to="/"
+              className="flex gap-2 items-center justify-center font-semibold text-blue-600"
+            >
+              <span>Back to homepage</span>
+            </Link>
+          )}
         </div>
       </div>
     </div>
